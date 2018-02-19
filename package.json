@@ -1,0 +1,87 @@
+{
+    "name": "basis-api",
+    "version": "1.0.0",
+    "description": "basis backend",
+    "author": "XelpmocDesignandTechPvtLtd",
+    "license": "MIT",
+    "scripts": {
+        "dev-server": "rm -rf logs && mkdir logs && nodemon --exec \"nodemon --exec NODE_ENV=development babel-node --inspect src\"",
+        "build": "babel -d ./build src && rm -rf logs && mkdir logs",
+        "start": "yarn run build  && pm2 startOrRestart ecosystem.config.js ",
+        "test": "rm -rf logs && mkdir logs && NODE_ENV=test jest --forceExit --runInBand",
+        "deploy": "rm -rf logs && mkdir logs && pm2 deploy ecosystem.config.js staging --force",
+        "lint": "eslint 'src/**/*.js'",
+        "precommit": "lint-staged",
+        "fix-lint": "prettier --write './src/**/*.js' && npm run-script lint"
+    },
+    "jest": {
+        "moduleFileExtensions": [
+            "js",
+            "json"
+        ],
+        "testMatch": [
+            "**/?(*.)(spec|test).js"
+        ],
+        "transform": {
+            "^.+\\.jsx?$": "babel-jest"
+        },
+        "testEnvironment": "node"
+    },
+    "lint-staged": {
+        "*.js": [
+            "eslint",
+            "git add"
+        ]
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/XelpmocDesignandTechPvtLtd/basis-api.git"
+    },
+    "keywords": [
+        "backend",
+        "boilerplate"
+    ],
+    "bugs": {
+        "url": "https://github.com/XelpmocDesignandTechPvtLtd/basis-api/issues"
+    },
+    "homepage": "https://github.com/XelpmocDesignandTechPvtLtd/basis-api/blob/master/README.md",
+    "dependencies": {
+        "babel-cli": "^6.26.0",
+        "babel-plugin-transform-builtin-extend": "^1.1.2",
+        "babel-polyfill": "^6.26.0",
+        "babel-preset-env": "^1.6.0",
+        "bcryptjs": "^2.4.3",
+        "big.js": "^5.0.3",
+        "body-parser": "^1.18.2",
+        "cookie-parser": "^1.4.3",
+        "express": "^4.16.1",
+        "express-force-ssl": "^0.3.2",
+        "express-request-language": "^1.1.12",
+        "firebase": "^4.8.1",
+        "husky": "^0.14.3",
+        "jsonwebtoken": "^8.0.1",
+        "lint-staged": "^4.0.2",
+        "lodash": "^4.17.4",
+        "moment": "^2.20.1",
+        "mongoose": "^5.0.0-rc2",
+        "node-fetch": "^1.7.3",
+        "node-logger-es6": "^1.2.2",
+        "node-schedule": "^1.3.0",
+        "uuid": "^3.1.0",
+        "validator": "^9.2.0"
+    },
+    "devDependencies": {
+        "babel-eslint": "^8.0.1",
+        "babel-jest": "^21.2.0",
+        "babel-plugin-transform-class-properties": "^6.24.1",
+        "babel-plugin-transform-object-rest-spread": "^6.26.0",
+        "eslint": "^4.8.0",
+        "eslint-config-prettier": "^2.6.0",
+        "eslint-plugin-import": "^2.7.0",
+        "eslint-plugin-prettier": "^2.3.1",
+        "jest": "^21.2.1",
+        "nodemon": "^1.12.1",
+        "pm2": "^2.8.0",
+        "prettier": "^1.7.3"
+    }
+}

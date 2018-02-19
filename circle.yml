@@ -1,0 +1,22 @@
+machine:
+  node:
+    version: 8.2.0
+  services:
+    - mongod    
+dependencies:
+  pre:
+    - node --version
+    - npm --version
+    - mongod --version
+  override:
+    - yarn install
+test:
+  override:
+    - yarn  lint
+    - yarn  test:
+      timeout: 1200 
+deployment:
+  staging:
+    branch: master
+    commands:
+      - yarn deploy
